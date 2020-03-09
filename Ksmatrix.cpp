@@ -4,7 +4,7 @@
 using namespace std;
 
 //Defining functions :)
-float simple_det(int arr_size, float arr[][50])
+float simple_det(int arr_size, float arr[50][50])
 {
 	float det;
 	if (arr_size == 3)
@@ -21,32 +21,42 @@ float simple_det(int arr_size, float arr[][50])
 	return det;
 }
 
-float complex_det(int arr_size, float arr[][50])
+float complex_det(int arr_size, float arr[50][50])
 {
-	float determinant = 0, tmp[49][50];
+	float det = 0;
 	if (arr_size <= 3)
-	{
-		determinant = simple_det(arr_size, arr);
-	}
+		det = simple_det(arr_size, arr);
 	else
 	{
+		float tmp[50][50];
 		for (int i = 0; i < arr_size; i++)
-			{
-				//temporary array
-				for (int j = 1; j < arr_size; j++)
-					for (int k = 1; k < arr_size; k++)
-						if (j < i)
-							tmp[j][k] = arr[j][k];
-						else
-							tmp[j][k] = arr[j + 1][k];
-				//Determinant
-				for (int i = 0; i < arr_size; i++)
-					if (!(i%2))
-						determinant = determinant + complex_det(arr_size - 1, tmp);
+		{
+			//temporary array
+			for (int j = 1; j < arr_size; j++)
+				for (int k = 1; k < arr_size; k++)
+					if (j < i)
+						tmp[j][k] = arr[j][k];
 					else
-						determinant = determinant - complex_det(arr_size - 1, tmp);
-			}
+						tmp[j][k] = arr[j + 1][k];
+			float tmp_det = complex_det(arr_size - 1, tmp);
+				//Determinant
+			if (!(i%2))
+				det = det + arr[i][0] * tmp_det;// * complex_det(arr_size - 1, tmp);
+			else
+				det = det - arr[i][0] * tmp_det;// * complex_det(arr_size - 1, tmp);
+		}	
 	}
+	return det;
+}
+
+
+float det(int arr_size, float arr[50][50])
+{
+	float determinant = 0;
+	if (arr_size <= 3)
+		determinant = simple_det(arr_size, arr);
+	else
+		determinant = complex_det(arr_size, arr);	
 	return determinant;
 }
 
@@ -57,7 +67,7 @@ void array_input(int arr_size, float array[][50])
 		for (int j = 0; j < arr_size; j++)
 		{
 			float tmp;
-			cout << "\nPlease input matrix element [" << j + 1 << "][" << i + 1 << "] > "; 
+			cout << "Please input matrix element [" << j + 1 << "][" << i + 1 << "] > "; 
 			cin >> tmp;
 			array[j][i] = tmp; 
 		}
@@ -89,7 +99,7 @@ int main()
 	cin >> arr_size;
 	array_input(arr_size, array);
 	//Calculating determinant
-	determinant = complex_det(arr_size, array);
+	determinant = det(arr_size, array);
 	//Printing output
 	cout << "\nInput matrix:\n";
 	print_arr(arr_size, array);
