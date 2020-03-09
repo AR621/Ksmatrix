@@ -32,18 +32,18 @@ float complex_det(int arr_size, float arr[50][50])
 		for (int i = 0; i < arr_size; i++)
 		{
 			//temporary array
-			for (int j = 1; j < arr_size; j++)
-				for (int k = 1; k < arr_size; k++)
-					if (j < i)
-						tmp[j][k] = arr[j][k];
+			for (int j = 0; j < arr_size - 1; j++)
+				for (int k = 0; k < arr_size - 1; k++)
+					if (k < i)
+						tmp[k][j] = arr[k][j];
 					else
-						tmp[j][k] = arr[j + 1][k];
+						tmp[k][j] = arr[k + 1][j];
 			float tmp_det = complex_det(arr_size - 1, tmp);
 				//Determinant
 			if (!(i%2))
-				det = det + arr[i][0] * tmp_det;// * complex_det(arr_size - 1, tmp);
+				det = det + arr[i][0] * tmp_det;
 			else
-				det = det - arr[i][0] * tmp_det;// * complex_det(arr_size - 1, tmp);
+				det = det - arr[i][0] * tmp_det; 
 		}	
 	}
 	return det;
