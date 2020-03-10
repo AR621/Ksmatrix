@@ -4,6 +4,22 @@
 using namespace std;
 
 //Defining functions :)
+
+void print_arr(int arr_size, float arr[][50])
+{
+	for (int i = 0; i < arr_size; i++)
+	{
+		cout << "{ ";
+		for (int j = 0; j < arr_size; j++)
+		{
+			cout << arr[j][i];
+			if (j < arr_size - 1)
+				cout << " ; "; 
+		}
+		cout << " }\n";
+	}
+}
+
 float simple_det(int arr_size, float arr[50][50])
 {
 	float det;
@@ -35,9 +51,9 @@ float complex_det(int arr_size, float arr[50][50])
 			for (int j = 0; j < arr_size - 1; j++)
 				for (int k = 0; k < arr_size - 1; k++)
 					if (k < i)
-						tmp[k][j] = arr[k][j];
+						tmp[k][j] = arr[k][j + 1];
 					else
-						tmp[k][j] = arr[k + 1][j];
+						tmp[k][j] = arr[k + 1][j + 1];
 			float tmp_det = complex_det(arr_size - 1, tmp);
 				//Determinant
 			if (!(i%2))
@@ -73,22 +89,6 @@ void array_input(int arr_size, float array[][50])
 		}
 	}
 }
-
-void print_arr(int arr_size, float arr[][50])
-{
-	for (int i = 0; i < arr_size; i++)
-	{
-		cout << "{ ";
-		for (int j = 0; j < arr_size; j++)
-		{
-			cout << arr[j][i];
-			if (j < arr_size - 1)
-				cout << " ; "; 
-		}
-		cout << " }\n";
-	}
-}
-
 int main()
 {
 	//Variables
