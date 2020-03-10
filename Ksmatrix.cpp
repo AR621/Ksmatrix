@@ -20,28 +20,11 @@ void print_arr(int arr_size, float arr[][50])
 	}
 }
 
-float simple_det(int arr_size, float arr[50][50])
+float det(int arr_size, float arr[50][50])
 {
-	float det;
-	if (arr_size == 3)
-		det = arr[0][0] * arr[1][1] * arr[2][2]
-			+ arr[1][0] * arr[2][1] * arr[0][2]
-		       	+ arr[2][0] * arr[0][1] * arr[1][2]
-			- arr[2][0] * arr[1][1] * arr[0][2]
-			- arr[1][0] * arr[0][1] * arr[2][2]
-			- arr[0][0] * arr[2][1] * arr[1][2];
-	if (arr_size == 2)
-		det = arr[0][0] * arr[1][1] - arr[1][0] * arr[0][1];
-	if ( arr_size == 1)
-		det = arr[0][0];
-	return det;
-}
-
-float complex_det(int arr_size, float arr[50][50])
-{
-	float det = 0;
-	if (arr_size <= 3)
-		det = simple_det(arr_size, arr);
+	float determinant = 0;
+	if (arr_size == 1)
+		determinant = arr[0][0];
 	else
 	{
 		float tmp[50][50];
@@ -54,25 +37,14 @@ float complex_det(int arr_size, float arr[50][50])
 						tmp[k][j] = arr[k][j + 1];
 					else
 						tmp[k][j] = arr[k + 1][j + 1];
-			float tmp_det = complex_det(arr_size - 1, tmp);
-				//Determinant
+			//Determinant
 			if (!(i%2))
-				det = det + arr[i][0] * tmp_det;
+				determinant = determinant + arr[i][0] * det(arr_size - 1, tmp);
 			else
-				det = det - arr[i][0] * tmp_det; 
+				determinant = determinant - arr[i][0] * det(arr_size - 1, tmp);
+
 		}	
 	}
-	return det;
-}
-
-
-float det(int arr_size, float arr[50][50])
-{
-	float determinant = 0;
-	if (arr_size <= 3)
-		determinant = simple_det(arr_size, arr);
-	else
-		determinant = complex_det(arr_size, arr);	
 	return determinant;
 }
 
