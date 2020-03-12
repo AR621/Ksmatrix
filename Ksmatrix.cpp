@@ -67,7 +67,7 @@ int main()
 	float determinant, array[50][50];
 	int arr_size = 1;
 	//User input
-	cout << "Matrix determinawnt.\nPlease input the size of an array of which the determinant will be calculated: ";
+	cout << "Matrix determinant calculatoR.\nPlease input the size of an array of which the determinant will be calculated: ";
 	cin >> arr_size;
 	array_input(arr_size, array);
 	//Calculating determinant
