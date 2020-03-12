@@ -1,7 +1,5 @@
 #Defining functions
 
-import numpy as np
-
 def arr_in():
     size = int(input("Please input the size of an array of which the determinant will be calculated: "))
     array = list()
