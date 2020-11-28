@@ -3,7 +3,7 @@
 
 using namespace std;
 
-//Defining functions
+//Defining functions :)
 float simple_det(int arr_size, float arr[][50])
 {
 	float det;
